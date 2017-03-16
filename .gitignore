@@ -1,0 +1,8 @@
+#Data
+data/
+
+#Ipython checkpoints
+.ipynb_checkpoints/
+
+#Files ending with ~
+*.*~
