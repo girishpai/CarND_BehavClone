@@ -7,8 +7,5 @@ data/
 #Files ending with ~
 *.*~
 
-#Model file
-model.h5
-
 #Misc
 .DS_STORE
