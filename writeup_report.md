@@ -1,8 +1,6 @@
-#**Behavioral Cloning** 
+#**Behavioral Cloning**
 
-##Writeup Template
-
-###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
+##Writeup Report
 
 ---
 
@@ -38,7 +36,7 @@ My project includes the following files:
 * model.py containing the script to create and train the model
 * drive.py for driving the car in autonomous mode
 * model.h5 containing a trained convolution neural network 
-* writeup_report.md or writeup_report.pdf summarizing the results
+* writeup_report.md summarizing the results
 
 ####2. Submission includes functional code
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
@@ -54,7 +52,10 @@ The model.py file contains the code for training and saving the convolution neur
 
 ####1. An appropriate model architecture has been employed
 
-My model consists of a convolution neural network with 3x3 filter sizes and depths between 32 and 128 (model.py lines 18-24) 
+My final model architecture was borrowed from Nvidia's paper 
+https://arxiv.org/pdf/1604.07316.pdf
+
+This consists of a convolution neural network with 3x3 filter sizes and depths between 32 and 128 (model.py lines 18-24) 
 
 The model includes RELU layers to introduce nonlinearity (code line 20), and the data is normalized in the model using a Keras lambda layer (code line 18). 
 
@@ -70,7 +71,7 @@ The model used an adam optimizer, so the learning rate was not tuned manually (m
 
 ####4. Appropriate training data
 
-Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road ... 
+Training data was chosen to keep the vehicle driving on the road. I used the center , left and right camera images to keep the vehicle on the road. For the left and right camera images a correction factor to get the correct steering angle if the car encountered any of the curbs or turns. 
 
 For details about how I created the training data, see the next section. 
 
@@ -78,11 +79,17 @@ For details about how I created the training data, see the next section.
 
 ####1. Solution Design Approach
 
-The overall strategy for deriving a model architecture was to ...
+The overall strategy for deriving a model architecture was as follows : 
+1) Generate data by driving the car myself around track 1 for 2 laps. 
+2) Split the dataset (images and steering angle)  into training and validation sets.
+3) Choose a base model. 
+4) Train the model with the training / validaiton data for fixed epochs till you get sufficiently low validation loss. 
+5) Save the model and run the simulator in autonomous mode. 
+6) Update the model and / or do some additional preprocessing to the data and repeat steps 4 and 5 till the car is able to drive successfully for at least 1 lap. 
 
-My first step was to use a convolution neural network model similar to the ... I thought this model might be appropriate because ...
+The base model which I chose was similar to that of Nvidia (https://arxiv.org/pdf/1604.07316.pdf). The main reason for this is that the purpose of the model was exactly same as what I was trying to do - make a car drive autonomousl - with NVIDIA driving a real car in a real city as opposed to a simulated environment. 
 
-In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
+
 
 To combat the overfitting, I modified the model so that ...
 
