@@ -1,5 +1,6 @@
 #Data
 data/
+video/
 
 #Ipython checkpoints
 .ipynb_checkpoints/
