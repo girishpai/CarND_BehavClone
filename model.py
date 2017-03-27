@@ -3,6 +3,8 @@
 import csv
 import cv2
 import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
 
 def open_csv(filename) :
     lines = []
@@ -11,10 +13,27 @@ def open_csv(filename) :
         for line in reader :
             lines.append(line)
     return lines
-    
+
+
+def get_data_stats(lines) :
+    measurements = []
+    for line in lines[1:] :
+        source_path = line[0]
+        filename = source_path.split('/')[-1]
+        current_path = './data/data/IMG/' + filename
+        measurement = float(line[3]) 
+        measurements.append(measurement)
+    df = pd.DataFrame(measurements)
+    df.hist()
+    plt.show()
+
+        
+
 #Read the lines from csv
 lines = open_csv("./data/new_data/driving_log.csv")
 
+#Uncomment to get the data stats
+#get_data_stats(lines)
 
 #Split into train and validation samples. 
 from sklearn.model_selection import train_test_split
